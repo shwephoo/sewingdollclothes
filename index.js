@@ -30,10 +30,10 @@ app.post('/webhook', (req, res) => {
             //handleMessage(sender_psid, webhook_event.message);        
             console.log("text:", text);
                if(text=='Hi'|| text=="hi"){
-                response = {
+                  var response = {
                     "text": `Welcome from Dim Online SweingClothes !`
                   }
-                  let request_body = {
+                  var request_body = {
                     "recipient": {                
                       "id": sender_psid                
                     },                
@@ -53,6 +53,44 @@ app.post('/webhook', (req, res) => {
                     }                
                   }); 
                } 
+               if(text=='Hello'){
+                    var response = {
+                    "text": `Welcome from Dim Online SweingClothes !`,
+                    "quick_replies":[
+                        {
+                          "content_type":"text",
+                          "title":"Red",
+                          "payload":"<POSTBACK_PAYLOAD>",
+                          "image_url":"http://example.com/img/red.png"
+                        },{
+                          "content_type":"text",
+                          "title":"Green",
+                          "payload":"<POSTBACK_PAYLOAD>",
+                          "image_url":"http://example.com/img/green.png"
+                        }
+                      ]
+                  
+                  }
+                  var request_body = {
+                    "recipient": {                
+                      "id": sender_psid                
+                    },                
+                    "message": response                
+                  }
+                                
+                  request({                
+                    "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                    "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                    "method": "POST",                
+                    "json": request_body                
+                  }, (err, res, body) => {                
+                    if (!err) {                
+                      console.log('message sent!')                
+                    } else {                
+                      console.error("Unable to send message:" + err);                
+                    }                
+                  }); 
+               }
           } 
       });
   
