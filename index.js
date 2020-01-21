@@ -8,7 +8,7 @@ const
   
   const request = require('request');
   const requestify = require('requestify');
-  const PAGE_ACCESS_TOKEN = 'EAAkIPYzXXeQBAAk5uVr9n5xtBwQ84jZCgqQ24uJYzWz4gL6MbXEqQWO1M7QSXs87Idb3vS2HxpUhdOCwSUWZBL0fU946ZArAkMQEcUmTbmNiT1paiRZAhflnol2MnOcnrSA4zp0QCQpR3wpPbStnkb1PvHVuj1ZBkYZCUtgOh6WWXhMhINJR6n';
+  const PAGE_ACCESS_TOKEN = 'EAAkIPYzXXeQBANwIkMjSLeqPFIFWelgtlPQM9iSKyE9IE1ZCaTBw3h6EMA8Q3NKkjuep3hiLPxsZB2mi4RUXSERy23bXQM3eGZBuKZAriRyu1sFiZCdEQ0JlxjVvaF3BVyMaHD9m9PLnQqZCV0j7NgkhGGAthBfFwacfTkrDDJInE1EwpX9MMW';
 
 // Creates the endpoint for our webhook 
 app.post('/webhook', (req, res) => {  
