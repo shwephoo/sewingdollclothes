@@ -29,8 +29,8 @@ app.post('/webhook', (req, res) => {
         if (webhook_event.message) {
             var text = webhook_event.message.text;
             //handleMessage(sender_psid, webhook_event.message);        
-
-               if(text=='Hi'){
+            console.log("text:", text);
+               if(text=='Hi'|| text=="hi"){
                 response = {
                     "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
                   }
