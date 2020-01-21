@@ -24,7 +24,7 @@ app.post('/webhook', (req, res) => {
         // will only ever contain one message, so we get index 0
         let webhook_event = entry.messaging[0];
         console.log(webhook_event);
-        var sender_psid = webhook.webhook_event.sender.id;
+        var sender_psid = webhook_event.sender.id;
         if (webhook_event.message) {
             var text = webhook_event.message.text;
             //handleMessage(sender_psid, webhook_event.message);        
