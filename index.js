@@ -31,7 +31,7 @@ app.post('/webhook', (req, res) => {
             console.log("text:", text);
                if(text=='Hi'|| text=="hi"){
                 response = {
-                    "text": `You sent the message: "${received_message.text}". Now send me an attachment!`
+                    "text": `Welcome from Dim Online SweingClothes !`
                   }
                   let request_body = {
                     "recipient": {                
