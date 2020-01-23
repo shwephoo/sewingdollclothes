@@ -59,16 +59,16 @@ app.post('/webhook', (req, res) => {
                } 
                if(text=='Hello'){
                     var response = {
-                    "text": `Welcome from Dim Online SweingClothes !`,
+                    "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`,
                     "quick_replies":[
                         {
                           "content_type":"text",
-                          "title":"Red",
+                          "title":"Sewing",
                           "payload":"<POSTBACK_PAYLOAD>",
                           "image_url":"http://example.com/img/red.png"
                         },{
                           "content_type":"text",
-                          "title":"Green",
+                          "title":"Buying",
                           "payload":"<POSTBACK_PAYLOAD>",
                           "image_url":"http://example.com/img/green.png"
                         }
