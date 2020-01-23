@@ -1,3 +1,7 @@
+// heroku logs -t -a sewingdollclothes
+
+// deploy --> github desktop 1. commit  2. push --> heroku 3. deploy
+
 'use strict';
 
 // Imports dependencies and set up http server
@@ -29,17 +33,17 @@ app.post('/webhook', (req, res) => {
             var text = webhook_event.message.text;
             //handleMessage(sender_psid, webhook_event.message);        
             console.log("text:", text);
-               if(text=='Hi'|| text=="hi"){
+              
+            if(text=='Hi'|| text=="hi"){
                   var response = {
-                    "text": `Welcome from Dim Online SweingClothes !`
+                    "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`
                   }
                   var request_body = {
                     "recipient": {                
                       "id": sender_psid                
                     },                
                     "message": response                
-                  }
-                                
+                  }                                
                   request({                
                     "uri": "https://graph.facebook.com/v5.0/me/messages",                
                     "qs": { "access_token": PAGE_ACCESS_TOKEN },                
@@ -91,6 +95,7 @@ app.post('/webhook', (req, res) => {
                     }                
                   }); 
                }
+
           } 
       });
   
