@@ -6,6 +6,7 @@
 
 // Imports dependencies and set up http server
 const
+
   express = require('express'),
   bodyParser = require('body-parser'),
   app = express().use(bodyParser.json()); // creates express http server
@@ -63,9 +64,48 @@ app.post('/webhook', (req, res) => {
                     }                
                   }); 
                }
+               else if(text=='button'){
+                var response = {
+                  "text": "Pick a color:",
+                  "quick_replies":[
+                    {
+                      "content_type":"text",
+                      "title":"Red",
+                      "payload":"<POSTBACK_PAYLOAD>",
+                      "image_url":"http://example.com/img/red.png"
+                    },{
+                      "content_type":"text",
+                      "title":"Green",
+                      "payload":"<POSTBACK_PAYLOAD>",
+                      "image_url":"http://example.com/img/green.png"
+                    }
+                  ]
+                }
+                var request_body = {
+                  "recipient": {                
+                    "id": sender_psid                
+                  },                
+                  "message": response                
+                }                                
+                request({                
+                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                  "method": "POST",                
+                  "json": request_body                
+                }, (err, res, body) => {                
+                  if (!err) {                
+                    console.log('message sent!')
+                  } else {                
+                    console.error("Unable to send message:" + err);                
+                  }                
+                }); 
+
+               }
 
           } 
       });
+
+    
   
       // Returns a '200 OK' response to all requests
       res.status(200).send('EVENT_RECEIVED');
