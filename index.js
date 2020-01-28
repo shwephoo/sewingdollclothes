@@ -62,7 +62,12 @@ app.post('/webhook', (req, res) => {
                     "recipient": {                
                       "id": sender_psid                
                     },                
-                    "payload": response                
+                    "message": {
+                      "attachment": {
+                        "type": "template",
+                        "payload": response
+                      }
+                    }                
                   }                                
                   request({                
                     "uri": "https://graph.facebook.com/v5.0/me/messages",                
@@ -99,8 +104,13 @@ app.post('/webhook', (req, res) => {
                   "recipient": {                
                     "id": sender_psid                
                   },                
-                  "payload": response                
-                }                                
+                  "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": response
+                    }
+                  }                
+                }                              
                 request({                
                   "uri": "https://graph.facebook.com/v5.0/me/messages",                
                   "qs": { "access_token": PAGE_ACCESS_TOKEN },                
