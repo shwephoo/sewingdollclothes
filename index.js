@@ -124,6 +124,46 @@ app.post('/webhook', (req, res) => {
                   }                
                 }); 
 
+               }else if (text == 'sew'){
+                var response = {
+                  "template_type": "button",
+                  "text": `Would you like to choose a preset design or customize?`,
+                  "buttons": [
+                    {
+                      "type": "postback",
+                      "title": "Own Design",
+                      "payload": "sewdesign_own"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Others",
+                      "payload": "sewdesign_shop"
+                    }
+                  ]
+                }
+                var request_body = {
+                  "recipient": {                
+                    "id": sender_psid                
+                  },                
+                  "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": response
+                    }
+                  }                
+                }                              
+                request({                
+                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                  "method": "POST",                
+                  "json": request_body                
+                }, (err, res, body) => {                
+                  if (!err) {                
+                    console.log('message sent!')
+                  } else {                
+                    console.error("Unable to send message:" + err);                
+                  }                
+                });
                }
 
           } 
