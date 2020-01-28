@@ -43,13 +43,26 @@ app.post('/webhook', (req, res) => {
             if(text=='Get_Started'|| text=="hi" || text=="Hi" || text=="Hello" || text=="hello"){
 
                   var response = {
-                    "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`
+                    "template_type": "button",
+                    "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`,
+                    "buttons": [
+                      {
+                        "type": "postback",
+                        "title": "Sewing",
+                        "payload": "sew"
+                      },
+                      {
+                        "type": "postback",
+                        "title": "Buying",
+                        "payload": "buy"
+                      }
+                    ]
                   }
                   var request_body = {
                     "recipient": {                
                       "id": sender_psid                
                     },                
-                    "message": response                
+                    "payload": response                
                   }                                
                   request({                
                     "uri": "https://graph.facebook.com/v5.0/me/messages",                
@@ -64,20 +77,21 @@ app.post('/webhook', (req, res) => {
                     }                
                   }); 
                }
-               else if(text=='button'){
+              
+               else if(text=='buy'){
                 var response = {
-                  "text": "Pick a color:",
-                  "quick_replies":[
+                  "template_type": "button",
+                  "text": `Who do you wish to buy for?`,
+                  "buttons": [
                     {
-                      "content_type":"text",
-                      "title":"Red",
-                      "payload":"<POSTBACK_PAYLOAD>",
-                      "image_url":"http://example.com/img/red.png"
-                    },{
-                      "content_type":"text",
-                      "title":"Green",
-                      "payload":"<POSTBACK_PAYLOAD>",
-                      "image_url":"http://example.com/img/green.png"
+                      "type": "postback",
+                      "title": "Children",
+                      "payload": "child"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Doll",
+                      "payload": "doll"
                     }
                   ]
                 }
@@ -85,7 +99,7 @@ app.post('/webhook', (req, res) => {
                   "recipient": {                
                     "id": sender_psid                
                   },                
-                  "message": response                
+                  "payload": response                
                 }                                
                 request({                
                   "uri": "https://graph.facebook.com/v5.0/me/messages",                
