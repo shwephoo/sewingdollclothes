@@ -33,8 +33,9 @@ app.post('/webhook', (req, res) => {
             var text = webhook_event.message.text;
             //handleMessage(sender_psid, webhook_event.message);        
             console.log("text:", text);
-              
-            if(text=='Hi'|| text=="hi"){
+
+            if(text=='Get_Started'|| text=="hi" || text=="Hi" || text=="Hello" || text=="hello"){
+
                   var response = {
                     "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`
                   }
@@ -51,45 +52,7 @@ app.post('/webhook', (req, res) => {
                     "json": request_body                
                   }, (err, res, body) => {                
                     if (!err) {                
-                      console.log('message sent!')                
-                    } else {                
-                      console.error("Unable to send message:" + err);                
-                    }                
-                  }); 
-               } 
-               if(text=='Hello'){
-                    var response = {
-                    "text": `Hello, Welcome from Dam Dam Sewing Doll Clothes!`,
-                    "quick_replies":[
-                        {
-                          "content_type":"text",
-                          "title":"Sewing",
-                          "payload":"<POSTBACK_PAYLOAD>",
-                          "image_url":"http://example.com/img/red.png"
-                        },{
-                          "content_type":"text",
-                          "title":"Buying",
-                          "payload":"<POSTBACK_PAYLOAD>",
-                          "image_url":"http://example.com/img/green.png"
-                        }
-                      ]
-                  
-                  }
-                  var request_body = {
-                    "recipient": {                
-                      "id": sender_psid                
-                    },                
-                    "message": response                
-                  }
-                                
-                  request({                
-                    "uri": "https://graph.facebook.com/v5.0/me/messages",                
-                    "qs": { "access_token": PAGE_ACCESS_TOKEN },                
-                    "method": "POST",                
-                    "json": request_body                
-                  }, (err, res, body) => {                
-                    if (!err) {                
-                      console.log('message sent!')                
+                      console.log('message sent!')
                     } else {                
                       console.error("Unable to send message:" + err);                
                     }                
