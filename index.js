@@ -48,13 +48,13 @@ app.post('/webhook', (req, res) => {
                     "buttons": [
                       {
                         "type": "postback",
-                        "title": "Sewing",
-                        "payload": "sew"
+                        "title": "About",
+                        "payload": "about"
                       },
                       {
                         "type": "postback",
-                        "title": "Buying",
-                        "payload": "buy"
+                        "title": "Get Services",
+                        "payload": "services"
                       }
                     ]
                   }
@@ -82,7 +82,124 @@ app.post('/webhook', (req, res) => {
                     }                
                   }); 
                }
-              
+               else if(text=='about'){
+                var response = {
+                  "template_type": "button",
+                  "text": `//////////////////////////////`,
+                }
+                var request_body = {
+                  "recipient": {                
+                    "id": sender_psid                
+                  },                
+                  "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": response
+                    }
+                  }                
+                }                              
+                request({                
+                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                  "method": "POST",                
+                  "json": request_body                
+                }, (err, res, body) => {                
+                  if (!err) {                
+                    console.log('message sent!')
+                  } else {                
+                    console.error("Unable to send message:" + err);                
+                  }                
+                }); 
+
+               }
+               else if(text=='services'){
+                var response = {
+                  "template_type": "button",
+                  "text": `Two services from Dam Dam`,
+                  "buttons": [
+                    {
+                      "type": "postback",
+                      "title": "Sewing",
+                      "payload": "sew"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Buying",
+                      "payload": "buy"
+                    }
+                  ]
+                }
+                var request_body = {
+                  "recipient": {                
+                    "id": sender_psid                
+                  },                
+                  "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": response
+                    }
+                  }                
+                }                              
+                request({                
+                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                  "method": "POST",                
+                  "json": request_body                
+                }, (err, res, body) => {                
+                  if (!err) {                
+                    console.log('message sent!')
+                  } else {                
+                    console.error("Unable to send message:" + err);                
+                  }                
+                }); 
+
+               }
+               else if (text == 'sew'){
+                var response = {
+                  "template_type": "button",
+                  "text": `Would you like to choose a preset design or customize?`,
+                  "buttons": [
+                    {
+                      "type":"postback",
+                      "title":"About sewing",
+                      "payload":"aboutsew"
+                    }
+                    {
+                      "type": "postback",
+                      "title": "Own Designs",
+                      "payload": "sewdesign_own"
+                    },
+                    {
+                      "type": "postback",
+                      "title": "Others",
+                      "payload": "sewdesign_shop"
+                    }
+                  ]
+                }
+                var request_body = {
+                  "recipient": {                
+                    "id": sender_psid                
+                  },                
+                  "message": {
+                    "attachment": {
+                      "type": "template",
+                      "payload": response
+                    }
+                  }                
+                }                              
+                request({                
+                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
+                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
+                  "method": "POST",                
+                  "json": request_body                
+                }, (err, res, body) => {                
+                  if (!err) {                
+                    console.log('message sent!')
+                  } else {                
+                    console.error("Unable to send message:" + err);                
+                  }                
+                });
+               }
                else if(text=='buy'){
                 var response = {
                   "template_type": "button",
@@ -124,46 +241,6 @@ app.post('/webhook', (req, res) => {
                   }                
                 }); 
 
-               }else if (text == 'sew'){
-                var response = {
-                  "template_type": "button",
-                  "text": `Would you like to choose a preset design or customize?`,
-                  "buttons": [
-                    {
-                      "type": "postback",
-                      "title": "Own Design",
-                      "payload": "sewdesign_own"
-                    },
-                    {
-                      "type": "postback",
-                      "title": "Others",
-                      "payload": "sewdesign_shop"
-                    }
-                  ]
-                }
-                var request_body = {
-                  "recipient": {                
-                    "id": sender_psid                
-                  },                
-                  "message": {
-                    "attachment": {
-                      "type": "template",
-                      "payload": response
-                    }
-                  }                
-                }                              
-                request({                
-                  "uri": "https://graph.facebook.com/v5.0/me/messages",                
-                  "qs": { "access_token": PAGE_ACCESS_TOKEN },                
-                  "method": "POST",                
-                  "json": request_body                
-                }, (err, res, body) => {                
-                  if (!err) {                
-                    console.log('message sent!')
-                  } else {                
-                    console.error("Unable to send message:" + err);                
-                  }                
-                });
                }
 
           } 
